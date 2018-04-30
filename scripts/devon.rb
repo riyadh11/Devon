@@ -208,5 +208,81 @@ class Devon
             end
         end
 
+        # Install all selected controllers
+        if settings.include?("editors")
+            if settings["editors"].to_s.length == 0
+                puts "Check your Devon.yaml file, you have no editors specified."
+                exit
+            end
+            settings["editors"].each do |editor|
+                if (editor == "nano")
+                    config.vm.provision "shell" do |s|
+                        s.name = "Installing Nano"
+                        s.path = scriptDir + "/install-nano.sh"
+                        s.privileged=false
+                    end
+                elsif (editor == "emacs")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Emacs"
+                        s.path = scriptDir + "/install-emacs.sh"
+                        s.privileged=false
+                    end
+                elsif (editor == "gedit")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Gedit"
+                        s.path = scriptDir + "/install-gedit.sh"
+                        s.privileged=false
+                    end
+                elsif (editor == "pycharm")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Pycharm"
+                        s.path = scriptDir + "/install-pycharm.sh"
+                        s.privileged=false
+                    end
+                elsif (editor == "vscode")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Visual Studio Code"
+                        s.path = scriptDir + "/install-vscode.sh"
+                        s.privileged=false
+                    end
+                else
+                    puts "Check your Devon.yaml file, you has specified wrong editor."
+                    exit
+                end
+            end
+        end
+
+        # Install all selected browsers
+        if settings.include?("browsers")
+            if settings["browsers"].to_s.length == 0
+                puts "Check your Devon.yaml file, you have no browser specified."
+                exit
+            end
+            settings["browsers"].each do |browser|
+                if (browser == "chrome")
+                    config.vm.provision "shell" do |s|
+                        s.name = "Installing Chrome"
+                        s.path = scriptDir + "/install-chrome.sh"
+                        s.privileged=false
+                    end
+                elsif (browser == "firefox")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Firefox"
+                        s.path = scriptDir + "/install-firefox.sh"
+                        s.privileged=false
+                    end
+                elsif (browser == "brave")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing Brave"
+                        s.path = scriptDir + "/install-brave.sh"
+                        s.privileged=false
+                    end
+                else
+                    puts "Check your Devon.yaml file, you has specified wrong editor."
+                    exit
+                end
+            end
+        end
+
     end
 end

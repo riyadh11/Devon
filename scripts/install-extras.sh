@@ -10,6 +10,7 @@ fi
 
 touch /home/vagrant/.extras
 
+sudo apt-get install -y software-properties-common
 sudo apt-get install -y git
 sudo apt-get install -y openssh-server
-sudo apt-get install -y nano
+sudo apt-get install -y apt-transport-https
