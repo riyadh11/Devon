@@ -159,10 +159,18 @@ class Devon
             end
         end
 
+        #Install Extras
+        config.vm.provision "shell" do |s|
+            s.name = "Installing Extras"
+            s.path = scriptDir + "/install-extras.sh"
+            s.privileged=false
+        end
+
         #Install PIP Dependency
         config.vm.provision "shell" do |s|
             s.name = "Installing Python PIP"
             s.path = scriptDir + "/install-pip.sh"
+            s.privileged=false
         end
 
         # Install Mininet
@@ -170,13 +178,9 @@ class Devon
             config.vm.provision "shell" do |s|
                 s.name = "Installing Mininet"
                 s.path = scriptDir + "/install-mininet.sh"
+                s.privileged=false
             end
         end
-
-        # Temporary fix to disable Z-Ray by default to be fixed in future base box update
-        # config.vm.provision "shell" do |s|
-        #     s.inline = "rm -rf /usr/lib/php/20170718/zray.so"
-        # end
 
         # Install all selected controllers
         if settings.include?("controllers")
@@ -189,11 +193,13 @@ class Devon
                     config.vm.provision "shell" do |s|
                         s.name = "Installing Ryu"
                         s.path = scriptDir + "/install-ryu.sh"
+                        s.privileged=false
                     end
                 elsif (controller == "pox")
                     config.vm.provision "shell" do |s|
                         s.name ="Installing POX"
                         s.path = scriptDir + "/install-pox.sh"
+                        s.privileged=false
                     end
                 else
                     puts "Check your Devon.yaml file, you has specified wrong controller."

@@ -16,4 +16,4 @@ cd mininet
 git checkout -b 2.2.2 2.2.2
 cd ..
 mininet/util/install.sh
-echo "alias miniedit='/usr/local/bin/mininet/examples/miniedit.py'" >> ~/.bashrc
+sudo echo "alias miniedit='/usr/local/bin/mininet/examples/miniedit.py'" >> ~/.bashrc

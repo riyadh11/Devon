@@ -12,3 +12,4 @@ touch /home/vagrant/.extras
 
 sudo apt-get install -y git
 sudo apt-get install -y openssh-server
+sudo apt-get install -y nano
