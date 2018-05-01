@@ -43,45 +43,53 @@ Vagrant Setup for Network Enthusiast
 
 ## Installation
 First you must clone this repository
-    ``` bash
-    $ git clone https://github.com/riyadh11/Devon.git
-    ```
+
+`$ git clone https://github.com/riyadh11/Devon.git`
+    
 Then move your default folder to Devon directory
-    ``` bash 
-    $ cd Devon
-    ```
+
+`$ cd Devon`
+
 Next Copy Devon.yaml.example to Devon.yaml
-    ``` bash
-    $ cp Devon.yaml.example Devon.yaml
-    ```
+
+`$ cp Devon.yaml.example Devon.yaml`
+
 After that, configure your devon configuration. Setting that can be customized are cpu core, ram, memory, os, ip and apps
-    ``` yaml
+
+Example :   
+	
     ip: "192.168.10.12"
-    memory: 2048
-    cpus: 2
-    provider: virtualbox
-    authorize: ~/.ssh/id_rsa.pub
-    keys:
+    
+	memory: 2048
+    
+	cpus: 2
+    
+	provider: virtualbox
+    
+	authorize: ~/.ssh/id_rsa.pub
+    
+	keys:
         - ~/.ssh/id_rsa
-    folders:
+    
+	folders:
         - map: D:/projects
           to: /home/vagrant/projects
           type: nfs
-      
+		  
     controllers:
-        - ryu
+		- ryu
     
     simulator : mininet
     editors :
         - vscode
     browsers :
         - firefox
-    ```
+    `
     
 Fire Up Vagrant
-    ``` bash
-    $ vagrant up
-    ```
+
+`$ vagrant up`
+
 Voila.
 
 ## Security
