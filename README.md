@@ -26,7 +26,7 @@ Vagrant Setup for Network Enthusiast
 - Software Properties Common
 
 ### Available Apps
-### Editor
+#### Editor
 - Nano
 - Gedit
 - Emacs25
