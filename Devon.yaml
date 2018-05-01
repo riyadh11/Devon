@@ -1,5 +1,5 @@
 ---
-ip: "192.168.10.77"
+ip: "192.168.10.12"
 memory: 2048
 cpus: 2
 provider: virtualbox
@@ -15,23 +15,16 @@ folders:
       type: nfs
 
 controllers:
-    - pox
     - ryu
 
 simulator : mininet
 
 editors :
-    - emacs
-    - nano
-    - gedit
-    - pycharm
     - vscode
 
 browsers :
-    - chrome
     - firefox
-    - brave
-
+    
 # ports:
 #     - send: 50000
 #       to: 5000

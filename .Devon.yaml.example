@@ -1,0 +1,45 @@
+---
+ip: "192.168.10.77"
+memory: 2048
+cpus: 2
+provider: virtualbox
+
+#Specify your public and private key for automatic ssh
+authorize: ~/.ssh/id_rsa.pub
+keys:
+    - ~/.ssh/id_rsa
+
+#Specify your mount folder
+folders:
+    - map: D:/Document
+      to: /home/vagrant/document
+      type: nfs
+
+#Specify your SDN controller
+controllers:
+    - ryu
+    # - pox
+
+#Specify your SDN simulator
+simulator : mininet
+
+#Specify your favourite editor
+editors :
+    - emacs
+    # - nano
+    # - gedit
+    # - pycharm
+    # - vscode
+
+#Specify your favourite browser
+browsers :
+    - firefox
+    # - chrome
+    # - brave
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
