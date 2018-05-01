@@ -101,4 +101,4 @@ If you discover any security related issues, please email ahmad.riyadh.al@faathi
 - [halvards](https://app.vagrantup.com/halvards)
 
 ## License
-The Apache License 2.0 License. Please see [License File](LICENSE.md) for more information.
+The Apache License 2.0 License. Please see [License File](LICENSE) for more information.
