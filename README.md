@@ -80,8 +80,10 @@ Example :
 		- ryu
     
     simulator : mininet
+    
     editors :
         - vscode
+    
     browsers :
         - firefox
     `
@@ -96,7 +98,7 @@ Voila.
 If you discover any security related issues, please email ahmad.riyadh.al@faathin.com instead of using the issue tracker.
 
 ## Credits
-- [https://app.vagrantup.com/halvards](halvards)
+- [halvards](https://app.vagrantup.com/halvards)
 
 ## License
 The Apache License 2.0 License. Please see [License File](LICENSE.md) for more information.
