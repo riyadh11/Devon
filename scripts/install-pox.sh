@@ -11,7 +11,7 @@ fi
 touch /home/vagrant/.pox
 
 cd /usr/local/bin
-git clone http://github.com/noxrepo/pox
+sudo git clone http://github.com/noxrepo/pox
 cd pox
-git checkout eel
-echo "alias pox='/usr/local/bin/pox/pox.py'" >> ~/.bashrc
+sudo git checkout eel
+sudo echo "alias pox='/usr/local/bin/pox/pox.py'" >> ~/.bashrc

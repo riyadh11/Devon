@@ -33,13 +33,34 @@ class Devon
         config.vm.provider "virtualbox" do |vb|
             vb.name = settings["name"] ||= "devon"
             vb.customize ["modifyvm", :id, "--memory", settings["memory"] ||= "2048"]
-            vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "1"]
+            vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "2"]
             vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
             vb.customize ["modifyvm", :id, "--natdnshostresolver1", settings["natdnshostresolver"] ||= "on"]
             vb.customize ["modifyvm", :id, "--ostype", "Ubuntu_64"]
             if settings.has_key?("gui") && settings["gui"]
                 vb.gui = true
             end
+        end
+
+        # Configure A Few VMware Settings
+        ["vmware_fusion", "vmware_workstation"].each do |vmware|
+            config.vm.provider vmware do |v|
+                v.vmx["displayName"] = settings["name"] ||= "devon"
+                v.vmx["memsize"] = settings["memory"] ||= 2048
+                v.vmx["numvcpus"] = settings["cpus"] ||= 1
+                v.vmx["guestOS"] = "ubuntu-64"
+                if settings.has_key?("gui") && settings["gui"]
+                    v.gui = true
+                end
+            end
+        end
+
+        # Configure A Few Parallels Settings
+        config.vm.provider "parallels" do |v|
+            v.name = settings["name"] ||= "devon"
+            v.update_guest_tools = settings["update_parallels_tools"] ||= false
+            v.memory = settings["memory"] ||= 2048
+            v.cpus = settings["cpus"] ||= 1
         end
 
         # Override Default SSH port on the host
@@ -223,25 +244,25 @@ class Devon
                     end
                 elsif (editor == "emacs")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Emacs"
+                        s.name = "Installing Emacs"
                         s.path = scriptDir + "/install-emacs.sh"
                         s.privileged=false
                     end
                 elsif (editor == "gedit")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Gedit"
+                        s.name = "Installing Gedit"
                         s.path = scriptDir + "/install-gedit.sh"
                         s.privileged=false
                     end
                 elsif (editor == "pycharm")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Pycharm"
+                        s.name = "Installing Pycharm"
                         s.path = scriptDir + "/install-pycharm.sh"
                         s.privileged=false
                     end
                 elsif (editor == "vscode")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Visual Studio Code"
+                        s.name = "Installing Visual Studio Code"
                         s.path = scriptDir + "/install-vscode.sh"
                         s.privileged=false
                     end
@@ -267,21 +288,28 @@ class Devon
                     end
                 elsif (browser == "firefox")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Firefox"
+                        s.name = "Installing Firefox"
                         s.path = scriptDir + "/install-firefox.sh"
                         s.privileged=false
                     end
                 elsif (browser == "brave")
                     config.vm.provision "shell" do |s|
-                        s.name ="Installing Brave"
+                        s.name = "Installing Brave"
                         s.path = scriptDir + "/install-brave.sh"
                         s.privileged=false
                     end
                 else
-                    puts "Check your Devon.yaml file, you has specified wrong editor."
+                    puts "Check your Devon.yaml file, you has specified wrong browser."
                     exit
                 end
             end
+        end
+
+        # Message
+        config.vm.provision "shell" do |s|
+            s.name = "Message from Developer"
+            s.path = scriptDir + "/after-provision.sh"
+            s.privileged = false
         end
 
     end

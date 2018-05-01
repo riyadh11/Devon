@@ -11,9 +11,9 @@ fi
 touch /home/vagrant/.mininet
 
 cd /usr/local/bin
-git clone git://github.com/mininet/mininet
+sudo git clone git://github.com/mininet/mininet
 cd mininet
-git checkout -b 2.2.2 2.2.2
+sudo git checkout -b 2.2.2 2.2.2
 cd ..
-mininet/util/install.sh
+sudo mininet/util/install.sh
 sudo echo "alias miniedit='/usr/local/bin/mininet/examples/miniedit.py'" >> ~/.bashrc
