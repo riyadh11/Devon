@@ -34,6 +34,7 @@ class Devon
             vb.name = settings["name"] ||= "devon"
             vb.customize ["modifyvm", :id, "--memory", settings["memory"] ||= "2048"]
             vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "2"]
+            vb.customize ["modifyvm", :id, "--vram", settings["graphic"] ||= "32"]
             vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
             vb.customize ["modifyvm", :id, "--natdnshostresolver1", settings["natdnshostresolver"] ||= "on"]
             vb.customize ["modifyvm", :id, "--ostype", "Ubuntu_64"]
@@ -194,12 +195,28 @@ class Devon
             s.privileged=false
         end
 
-        # Install Mininet
-        if settings.has_key?("simulator") && settings['simulator'] == "mininet"
-            config.vm.provision "shell" do |s|
-                s.name = "Installing Mininet"
-                s.path = scriptDir + "/install-mininet.sh"
-                s.privileged=false
+        if settings.include?("simulators")
+            if settings["simulators"].to_s.length == 0
+                puts "Check your Devon.yaml file, you have no simulators specified."
+                exit
+            end
+            settings["simulators"].each do |simulator|
+                if (simulator == "mininet")
+                    config.vm.provision "shell" do |s|
+                        s.name = "Installing Mininet"
+                        s.path = scriptDir + "/install-mininet.sh"
+                        s.privileged=false
+                    end
+                elsif (simulator == "ns3")
+                    config.vm.provision "shell" do |s|
+                        s.name ="Installing NS3"
+                        s.path = scriptDir + "/install-ns3.sh"
+                        s.privileged=true
+                    end
+                else
+                    puts "Check your Devon.yaml file, you has specified wrong simulator."
+                    exit
+                end
             end
         end
 
